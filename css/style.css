@@ -4,15 +4,17 @@
    ============================================ */
 
 :root {
-  /* Color Palette */
-  --color-bg-warm: #FBF7F0;
-  --color-bg-alt: #F2EBE0;
-  --color-text-dark: #2C2416;
+  /* Dark Navy × Gold Color Palette */
+  --color-bg-warm: #0F1B2D;        /* dark navy — main bg */
+  --color-bg-alt: #152438;         /* medium navy — alt sections */
+  --color-surface: #1A2D46;        /* card / panel surfaces */
+  --color-text-dark: #F0ECE2;      /* cream — main text (on dark bg) */
+  --color-text-muted: rgba(240, 236, 226, 0.60);  /* muted text */
   --color-gold: #C9A96E;
   --color-gold-light: #E8D5A3;
   --color-white: #FFFFFF;
-  --color-border: rgba(201, 169, 110, 0.3);
-  --color-overlay-dark: rgba(20, 14, 5, 0.35);
+  --color-border: rgba(201, 169, 110, 0.22);
+  --color-overlay-dark: rgba(10, 20, 38, 0.65);
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', serif;
@@ -99,8 +101,9 @@ img {
 }
 
 .header--scrolled {
-  background-color: var(--color-bg-warm);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: rgba(15, 27, 45, 0.97);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
   padding: var(--spacing-md) 0;
 }
 
@@ -220,7 +223,7 @@ img {
   left: 0;
   width: 100%;
   height: 115%;
-  background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1920&q=90&auto=format&fit=crop');
+  background-image: url('../images/onsen_rotenburo.jpg');
   background-size: cover;
   background-position: center top;
   background-attachment: scroll;
@@ -237,9 +240,9 @@ img {
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(20, 14, 5, 0.3) 0%,
-    rgba(20, 14, 5, 0.15) 40%,
-    rgba(20, 14, 5, 0.35) 100%
+    rgba(10, 20, 38, 0.45) 0%,
+    rgba(10, 20, 38, 0.20) 40%,
+    rgba(10, 20, 38, 0.55) 100%
   );
   z-index: 2;
 }
@@ -495,10 +498,10 @@ img {
 }
 
 .room-card {
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border-radius: var(--radius-sm);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
   transition: var(--transition-base);
   opacity: 0;
   transform: translateY(40px);
@@ -569,7 +572,7 @@ img {
 
 .room-card__specs {
   font-size: 0.9rem;
-  color: #7A6E62;
+  color: var(--color-text-muted);
   margin-bottom: var(--spacing-sm);
 }
 
@@ -771,7 +774,7 @@ img {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #5C5047;
+  background-color: var(--color-bg-alt);
 }
 
 .restaurant__background {
@@ -867,7 +870,7 @@ img {
 
 .restaurant__link:hover {
   background-color: var(--color-white);
-  color: var(--color-text-dark);
+  color: var(--color-bg-warm);
 }
 
 @media (max-width: 768px) {
@@ -988,8 +991,8 @@ img {
    ============================================ */
 
 .reserve {
-  background-color: var(--color-text-dark);
-  color: var(--color-white);
+  background-color: var(--color-gold);
+  color: var(--color-bg-warm);
   padding: var(--spacing-3xl) var(--spacing-lg);
 }
 
@@ -1036,23 +1039,23 @@ img {
 }
 
 .reserve__btn--primary {
-  background-color: var(--color-gold);
-  color: var(--color-text-dark);
+  background-color: var(--color-bg-warm);
+  color: var(--color-gold);
 }
 
 .reserve__btn--primary:hover {
-  background-color: var(--color-gold-light);
+  background-color: var(--color-bg-alt);
   transform: translateY(-2px);
 }
 
 .reserve__btn--secondary {
-  border: 1px solid var(--color-white);
-  color: var(--color-white);
+  border: 1px solid var(--color-bg-warm);
+  color: var(--color-bg-warm);
 }
 
 .reserve__btn--secondary:hover {
-  background-color: var(--color-white);
-  color: var(--color-text-dark);
+  background-color: var(--color-bg-warm);
+  color: var(--color-gold);
 }
 
 @media (max-width: 768px) {
@@ -1149,7 +1152,7 @@ img {
   width: 100%;
   text-align: center;
   font-size: 0.85rem;
-  color: #7A6E62;
+  color: var(--color-text-muted);
   border-top: 1px solid var(--color-border);
   padding-top: var(--spacing-lg);
   margin-top: var(--spacing-lg);
@@ -1242,4 +1245,72 @@ img {
   .hero__tagline {
     font-size: 1.1rem;
   }
+}
+
+/* ============================================
+   JAPANESE DECORATIVE ELEMENTS
+   ============================================ */
+
+/* Seigaiha (青海波) pattern overlay — applies to philosophy/rooms/spa sections */
+.philosophy,
+.rooms,
+.access {
+  position: relative;
+}
+
+.philosophy::before,
+.rooms::before,
+.access::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Cellipse cx='40' cy='40' rx='40' ry='40' fill='none' stroke='%23C9A96E' stroke-width='1'/%3E%3Cellipse cx='0' cy='40' rx='40' ry='40' fill='none' stroke='%23C9A96E' stroke-width='1'/%3E%3Cellipse cx='80' cy='40' rx='40' ry='40' fill='none' stroke='%23C9A96E' stroke-width='1'/%3E%3Cellipse cx='20' cy='0' rx='40' ry='40' fill='none' stroke='%23C9A96E' stroke-width='1'/%3E%3Cellipse cx='60' cy='0' rx='40' ry='40' fill='none' stroke='%23C9A96E' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 80px 40px;
+  z-index: 0;
+}
+
+.philosophy .philosophy__container,
+.rooms .rooms__container,
+.access .access__container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Corner maple leaf decoration */
+.section-maple {
+  position: relative;
+  overflow: hidden;
+}
+.section-maple::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 C52 20 65 18 62 30 C75 25 78 35 68 40 C80 42 78 52 68 50 C72 60 65 65 58 58 C55 70 50 72 50 72 C50 72 45 70 42 58 C35 65 28 60 32 50 C22 52 20 42 32 40 C22 35 25 25 38 30 C35 18 48 20 50 5Z' fill='%23C9A96E'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotate(25deg);
+  z-index: 0;
+}
+
+/* Gold top-border accent on key sections */
+.rooms__header::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-gold);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Access map — surface color update */
+.access__map {
+  background-color: var(--color-surface);
 }
