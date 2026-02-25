@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KAZUKI RESORT & SPA - アクセス・チェックイン情報。箱根への交通案内。">
+  <meta property="og:title" content="アクセス・チェックイン | KAZUKI RESORT & SPA">
+  <meta property="og:description" content="箱根仙石原の高級旅館へのアクセス情報・チェックイン時間・FAQ。">
+  <title>アクセス・チェックイン | KAZUKI RESORT & SPA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ============================================
+       Access Detail Page - Additional Styles
+       ============================================ */
+
+    .page-hero {
+      padding: clamp(120px, 18vh, 200px) clamp(32px, 8vw, 100px) clamp(60px, 8vh, 100px);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-hero__sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .page-hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      color: var(--color-text-dark);
+      margin-bottom: 20px;
+    }
+
+    .page-hero__desc {
+      color: #6B5B47;
+      font-size: 0.9rem;
+      line-height: 1.9;
+      max-width: 520px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: #6B5B47;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: var(--transition-base);
+    }
+
+    .back-link:hover {
+      color: var(--color-gold);
+    }
+
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(32px, 8vw, 100px) clamp(80px, 12vh, 140px);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--color-text-dark);
+      margin-bottom: 48px;
+    }
+
+    .gold-line {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--color-gold);
+      margin-bottom: 24px;
+    }
+
+    /* Access Section with Map */
+    .access-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 8vw, 80px);
+      align-items: flex-start;
+      margin-bottom: clamp(100px, 15vh, 160px);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .access-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .access-section__content h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 400;
+      color: var(--color-text-dark);
+      margin-bottom: 24px;
+    }
+
+    .access-block {
+      margin-bottom: 36px;
+    }
+
+    .access-block__title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--color-text-dark);
+      margin-bottom: 12px;
+    }
+
+    .access-block__detail {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--color-text-dark);
+    }
+
+    .access-block__detail strong {
+      color: var(--color-gold);
+      font-weight: 400;
+    }
+
+    .access-section__map {
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      min-height: 500px;
+      height: 500px;
+    }
+
+    .access-section__map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Checkin Information Table */
+    .checkin-section {
+      background: var(--color-bg-alt);
+      padding: clamp(40px, 8vw, 60px);
+      border-radius: 2px;
+      margin-bottom: clamp(100px, 15vh, 160px);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .checkin-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .checkin-section h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      color: var(--color-text-dark);
+      margin-bottom: 36px;
+    }
+
+    .checkin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .checkin-table td {
+      padding: 20px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .checkin-table td:first-child {
+      width: 30%;
+      color: var(--color-gold);
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
+
+    .checkin-table td:last-child {
+      color: var(--color-text-dark);
+    }
+
+    .checkin-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin-bottom: clamp(80px, 12vh, 140px);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .faq-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .faq-item {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .faq-item__question {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--color-text-dark);
+      margin-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .faq-item__question::before {
+      content: 'Q';
+      position: absolute;
+      left: 0;
+      color: var(--color-gold);
+      font-weight: 400;
+    }
+
+    .faq-item__answer {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #6B5B47;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .faq-item__answer::before {
+      content: 'A';
+      position: absolute;
+      left: 0;
+      color: var(--color-gold);
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      color: var(--color-bg-warm);
+      background: var(--color-text-dark);
+      padding: 16px 36px;
+      margin-top: 40px;
+      text-decoration: none;
+      transition: var(--transition-base);
+      text-transform: uppercase;
+    }
+
+    .cta-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-text-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-text-dark);
+      color: rgba(251, 247, 240, 0.6);
+      padding: 48px clamp(32px, 8vw, 100px);
+      margin-top: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      color: var(--color-gold);
+    }
+
+    footer .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      .access-section {
+        grid-template-columns: 1fr;
+      }
+
+      .access-section__map {
+        min-height: 350px;
+        height: 350px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .page-hero {
+        padding: 100px clamp(32px, 8vw, 100px) clamp(50px, 8vh, 80px);
+      }
+
+      .checkin-table td {
+        padding: 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header header--scrolled">
+    <div class="header__container">
+      <div class="header__logo" style="cursor:pointer;" onclick="location.href='../'">
+        <span class="header__logo-main">KAZUKI</span>
+        <span class="header__logo-sub">RESORT & SPA</span>
+      </div>
+      <nav class="header__nav">
+        <a href="../rooms/" class="header__nav-link">お部屋</a>
+        <a href="../dining/" class="header__nav-link">レストラン</a>
+        <a href="../spa/" class="header__nav-link">スパ & 温泉</a>
+        <a href="../access/" class="header__nav-link">アクセス</a>
+        <a href="../#reserve" class="header__nav-link">ご予約</a>
+      </nav>
+      <button class="header__cta" onclick="location.href='../#reserve'">ご予約はこちら</button>
+    </div>
+  </header>
+
+  <!-- Page Hero Section -->
+  <section class="page-hero" style="margin-top: 80px;">
+    <a href="../" class="back-link">← トップページへ</a>
+    <div class="gold-line"></div>
+    <p class="page-hero__sub">Access & Info</p>
+    <h1 class="page-hero__title">アクセス・チェックイン</h1>
+    <p class="page-hero__desc">
+      箱根仙石原へのアクセス方法、チェックイン情報、
+      よくあるご質問をご紹介します。
+    </p>
+  </section>
+
+  <!-- Access Section with Map -->
+  <section class="section-container">
+    <div class="access-section">
+      <div class="access-section__content">
+        <h3>アクセス情報</h3>
+
+        <div class="access-block">
+          <div class="access-block__title">住所</div>
+          <p class="access-block__detail">
+            〒250-0631<br>
+            <strong>神奈川県足柄下郡箱根町仙石原 1234</strong>
+          </p>
+        </div>
+
+        <div class="access-block">
+          <div class="access-block__title">電車・バス</div>
+          <p class="access-block__detail">
+            小田急線「<strong>箱根湯本駅</strong>」下車<br>
+            ↓<br>
+            <strong>無料送迎バス</strong>で約 15 分<br>
+            <br>
+            <small style="color: #7A6E62;">新宿駅より小田急線で約 85 分</small>
+          </p>
+        </div>
+
+        <div class="access-block">
+          <div class="access-block__title">お車</div>
+          <p class="access-block__detail">
+            東名高速「<strong>御殿場 IC</strong>」より<br>
+            約 30 分<br>
+            <br>
+            <strong>駐車場完備（無料）</strong>
+          </p>
+        </div>
+
+        <div class="access-block">
+          <div class="access-block__title">送迎サービス</div>
+          <p class="access-block__detail">
+            <strong>箱根湯本駅・小田原駅</strong>より<br>
+            無料送迎バスをご用意いたします。<br>
+            <small style="color: #7A6E62;">チェックイン前日までにお電話でご連絡ください。</small>
+          </p>
+        </div>
+      </div>
+
+      <div class="access-section__map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12967.0!2d138.997!3d35.261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="KAZUKI RESORT & SPA - 箱根仙石原"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkin Information -->
+  <section class="section-container">
+    <div class="checkin-section">
+      <h3>チェックイン・チェックアウト時間</h3>
+      <table class="checkin-table">
+        <tr>
+          <td>チェックイン</td>
+          <td>15:00〜18:00<br><small style="color: #7A6E62;">事前相談で対応可能な場合がございます。お気軽にお電話ください。</small></td>
+        </tr>
+        <tr>
+          <td>チェックアウト</td>
+          <td>〜11:00</td>
+        </tr>
+        <tr>
+          <td>ご夕食</td>
+          <td>18:00〜21:00（ご予約制）</td>
+        </tr>
+        <tr>
+          <td>朝食</td>
+          <td>7:00〜9:30（ご予約制）</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section-container">
+    <h2 class="section-title">
+      <span class="gold-line"></span>
+      よくあるご質問
+    </h2>
+    <div class="faq-section">
+      <div class="faq-item">
+        <div class="faq-item__question">お子さま連れでも宿泊できますか？</div>
+        <div class="faq-item__answer">
+          はい、喜んでお受けいたします。小学生以上のお子様は大人料金の 70% にてお受けいたします。
+          幼児（未就学児）はお一人につき添寝料金 ¥5,000 です。
+          ご不明な点はお気軽にお問い合わせください。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__question">ペットを連れて行けますか？</div>
+        <div class="faq-item__answer">
+          申し訳ございませんが、ペットのご同伴はご遠慮いただいております。
+          ご理解のほどよろしくお願いいたします。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__question">日帰りでの温泉利用はできますか？</div>
+        <div class="faq-item__answer">
+          はい、日帰り温泉プランをご用意いたしております。
+          お一人様 ¥1,800〜 にてご利用いただけます。
+          事前予約制となっておりますので、お電話でお問い合わせください。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__question">送迎はどこから利用できますか？</div>
+        <div class="faq-item__answer">
+          箱根湯本駅・小田原駅よりご利用いただけます。
+          ご到着予定時刻をチェックイン前日までにお電話でお知らせください。
+          専用の送迎バスでお迎えいたします。
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__question">現金以外の支払い方法はありますか？</div>
+        <div class="faq-item__answer">
+          クレジットカード（VISA / Mastercard / JCB / AMEX）をご利用いただけます。
+          その他のお支払い方法についてはお電話でお気軽にお問い合わせください。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section style="background: var(--color-text-dark); color: var(--color-bg-warm); padding: 80px clamp(32px, 8vw, 100px); text-align: center;">
+    <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 24px;">
+      ご不明な点がございましたら、
+      <br>お気軽にお問い合わせください
+    </h2>
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.9;">
+      KAZUKI RESORT & SPA のスタッフが、
+      <br>皆様のご質問にていねいにお答えいたします。
+    </p>
+    <a href="../#reserve" class="cta-btn" style="color: var(--color-text-dark); background: var(--color-gold);">ご予約・お問い合わせ</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">KAZUKI<br><span style="font-size: 0.7rem; letter-spacing: 0.2em;">RESORT & SPA</span></div>
+    <div class="footer-copy">© 2026 KAZUKI RESORT & SPA. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('.access-section, .checkin-section, .faq-section').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

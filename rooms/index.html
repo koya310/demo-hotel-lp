@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KAZUKI RESORT & SPA - お部屋のご案内。高級旅館の客室3タイプを詳しくご紹介。">
+  <meta property="og:title" content="お部屋のご案内 | KAZUKI RESORT & SPA">
+  <meta property="og:description" content="山側和室、露天風呂付スイート、スイートルーム - 箱根の高級旅館のお部屋。">
+  <title>お部屋のご案内 | KAZUKI RESORT & SPA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ============================================
+       Rooms Detail Page - Additional Styles
+       ============================================ */
+
+    .page-hero {
+      padding: clamp(120px, 18vh, 200px) clamp(32px, 8vw, 100px) clamp(60px, 8vh, 100px);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-hero__sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .page-hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      color: var(--color-text-dark);
+      margin-bottom: 20px;
+    }
+
+    .page-hero__desc {
+      color: #6B5B47;
+      font-size: 0.9rem;
+      line-height: 1.9;
+      max-width: 520px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: #6B5B47;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: var(--transition-base);
+    }
+
+    .back-link:hover {
+      color: var(--color-gold);
+    }
+
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(32px, 8vw, 100px) clamp(80px, 12vh, 140px);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--color-text-dark);
+      margin-bottom: 48px;
+    }
+
+    .gold-line {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--color-gold);
+      margin-bottom: 24px;
+    }
+
+    /* Room Detail Cards */
+    .rooms-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(60px, 12vh, 120px);
+      margin-bottom: clamp(80px, 12vh, 140px);
+    }
+
+    .room-detail-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 8vw, 80px);
+      align-items: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .rooms-detail-grid.is-visible .room-detail-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .room-detail-card:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .room-detail-card:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .room-detail-card:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .room-detail-card.reversed {
+      grid-template-columns: 1fr 1fr;
+      direction: rtl;
+    }
+
+    .room-detail-card.reversed > * {
+      direction: ltr;
+    }
+
+    .room-detail__image {
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .room-detail__image img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .room-detail__content {
+      padding: clamp(20px, 4vw, 40px) 0;
+    }
+
+    .room-detail__badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      border: 1px solid var(--color-gold);
+      padding: 8px 16px;
+      margin-bottom: 24px;
+    }
+
+    .room-detail__name {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      margin-bottom: 16px;
+      color: var(--color-text-dark);
+    }
+
+    .room-detail__specs {
+      font-size: 0.95rem;
+      color: #7A6E62;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .room-detail__price {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-gold);
+      margin-bottom: 24px;
+    }
+
+    .room-detail__description {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text-dark);
+      margin-bottom: 24px;
+    }
+
+    .room-detail__amenities {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .room-detail__amenity {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-text-dark);
+      margin-bottom: 12px;
+    }
+
+    .room-detail__amenity::before {
+      content: '■';
+      color: var(--color-gold);
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      margin-top: 4px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      color: var(--color-bg-warm);
+      background: var(--color-text-dark);
+      padding: 16px 36px;
+      margin-top: 40px;
+      text-decoration: none;
+      transition: var(--transition-base);
+      text-transform: uppercase;
+    }
+
+    .cta-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-text-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-text-dark);
+      color: rgba(251, 247, 240, 0.6);
+      padding: 48px clamp(32px, 8vw, 100px);
+      margin-top: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      color: var(--color-gold);
+    }
+
+    footer .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      .room-detail-card,
+      .room-detail-card.reversed {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+
+      .room-detail-card.reversed > * {
+        direction: ltr;
+      }
+
+      .room-detail__image img {
+        height: 300px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .page-hero {
+        padding: 100px clamp(32px, 8vw, 100px) clamp(50px, 8vh, 80px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header header--scrolled">
+    <div class="header__container">
+      <div class="header__logo" style="cursor:pointer;" onclick="location.href='../'">
+        <span class="header__logo-main">KAZUKI</span>
+        <span class="header__logo-sub">RESORT & SPA</span>
+      </div>
+      <nav class="header__nav">
+        <a href="../rooms/" class="header__nav-link">お部屋</a>
+        <a href="../dining/" class="header__nav-link">レストラン</a>
+        <a href="../spa/" class="header__nav-link">スパ & 温泉</a>
+        <a href="../access/" class="header__nav-link">アクセス</a>
+        <a href="../#reserve" class="header__nav-link">ご予約</a>
+      </nav>
+      <button class="header__cta" onclick="location.href='../#reserve'">ご予約はこちら</button>
+    </div>
+  </header>
+
+  <!-- Page Hero Section -->
+  <section class="page-hero" style="margin-top: 80px;">
+    <a href="../" class="back-link">← トップページへ</a>
+    <div class="gold-line"></div>
+    <p class="page-hero__sub">Rooms & Suites</p>
+    <h1 class="page-hero__title">お部屋のご案内</h1>
+    <p class="page-hero__desc">
+      KAZUKI RESORT & SPA では、3つのお部屋のタイプをご用意いたしております。
+      山々の景色を眺める和室から、プライベート露天風呂付きのスイートまで。
+      それぞれが特別な時間をお創りいたします。
+    </p>
+  </section>
+
+  <!-- Rooms Detail Section -->
+  <section class="section-container">
+    <div class="rooms-detail-grid">
+
+      <!-- Room 1: 山側和室 -->
+      <div class="room-detail-card">
+        <div class="room-detail__image">
+          <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&q=85&auto=format&fit=crop" alt="山側和室">
+        </div>
+        <div class="room-detail__content">
+          <div class="room-detail__badge">スタンダード</div>
+          <h2 class="room-detail__name">山側和室</h2>
+          <div class="room-detail__specs">
+            <strong>60㎡ / 最大2名</strong>
+          </div>
+          <div class="room-detail__price">from ¥35,000/泊</div>
+          <p class="room-detail__description">
+            箱根の山々を望む和室。檜の浴槽と源泉掛け流し温泉で、
+            四季折々の自然を感じながら贅沢なひとときをお過ごしいただけます。
+          </p>
+          <ul class="room-detail__amenities">
+            <li class="room-detail__amenity">源泉掛け流し内湯</li>
+            <li class="room-detail__amenity">ウォークインクローゼット</li>
+            <li class="room-detail__amenity">縁側</li>
+            <li class="room-detail__amenity">有線 LAN / Wi-Fi</li>
+          </ul>
+          <a href="../#reserve" class="cta-btn">予約する</a>
+        </div>
+      </div>
+
+      <!-- Room 2: 露天風呂付スイート -->
+      <div class="room-detail-card reversed">
+        <div class="room-detail__image">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=85&auto=format&fit=crop" alt="露天風呂付スイート">
+        </div>
+        <div class="room-detail__content">
+          <div class="room-detail__badge">プレミアム</div>
+          <h2 class="room-detail__name">露天風呂付スイート</h2>
+          <div class="room-detail__specs">
+            <strong>90㎡ / 最大2名</strong>
+          </div>
+          <div class="room-detail__price">from ¥65,000/泊</div>
+          <p class="room-detail__description">
+            プライベート露天風呂を完備したスイート。
+            湯浴みをしながら箱根の星空を眺める、特別な夜をお約束いたします。
+          </p>
+          <ul class="room-detail__amenities">
+            <li class="room-detail__amenity">プライベート露天風呂</li>
+            <li class="room-detail__amenity">セパレートリビング</li>
+            <li class="room-detail__amenity">檜の内湯</li>
+            <li class="room-detail__amenity">バトラーサービス</li>
+          </ul>
+          <a href="../#reserve" class="cta-btn">予約する</a>
+        </div>
+      </div>
+
+      <!-- Room 3: スイートルーム -->
+      <div class="room-detail-card">
+        <div class="room-detail__image">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=900&q=85&auto=format&fit=crop" alt="スイートルーム">
+        </div>
+        <div class="room-detail__content">
+          <div class="room-detail__badge">ラグジュアリー</div>
+          <h2 class="room-detail__name">スイートルーム</h2>
+          <div class="room-detail__specs">
+            <strong>120㎡ / 最大4名</strong>
+          </div>
+          <div class="room-detail__price">from ¥95,000/泊</div>
+          <p class="room-detail__description">
+            独立リビング・寝室・和室、専用テラス付露天風呂を備えた最上級スイート。
+            ご家族やご友人との特別な時間を、最高のおもてなしでお創りいたします。
+          </p>
+          <ul class="room-detail__amenities">
+            <li class="room-detail__amenity">独立リビング・寝室・和室</li>
+            <li class="room-detail__amenity">専用テラス付露天風呂</li>
+            <li class="room-detail__amenity">専任コンシェルジュ</li>
+            <li class="room-detail__amenity">プライベートダイニング対応</li>
+          </ul>
+          <a href="../#reserve" class="cta-btn">予約する</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section style="background: var(--color-text-dark); color: var(--color-bg-warm); padding: 80px clamp(32px, 8vw, 100px); text-align: center;">
+    <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 24px;">
+      ご不明な点はお気軽にお問い合わせください
+    </h2>
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.9;">
+      各お部屋の詳しい情報やカスタマイズについてなど、
+      <br>KAZUKI RESORT & SPA のスタッフがお答えいたします。
+    </p>
+    <a href="../#reserve" class="cta-btn" style="color: var(--color-text-dark); background: var(--color-gold);">お部屋を予約する</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">KAZUKI<br><span style="font-size: 0.7rem; letter-spacing: 0.2em;">RESORT & SPA</span></div>
+    <div class="footer-copy">© 2026 KAZUKI RESORT & SPA. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all room cards
+    const roomCards = document.querySelector('.rooms-detail-grid');
+    if (roomCards) {
+      observer.observe(roomCards);
+    }
+  </script>
+
+</body>
+</html>

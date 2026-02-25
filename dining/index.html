@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KAZUKI RESORT & SPA - お食事のご案内。箱根の山海の幸を使った会席料理。">
+  <meta property="og:title" content="お食事のご案内 | KAZUKI RESORT & SPA">
+  <meta property="og:description" content="夕食会席コース・朝食・バー&ラウンジ - 高級旅館のお食事。">
+  <title>お食事のご案内 | KAZUKI RESORT & SPA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ============================================
+       Dining Detail Page - Additional Styles
+       ============================================ */
+
+    .page-hero {
+      padding: clamp(120px, 18vh, 200px) clamp(32px, 8vw, 100px) clamp(60px, 8vh, 100px);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-hero__sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .page-hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      color: var(--color-text-dark);
+      margin-bottom: 20px;
+    }
+
+    .page-hero__desc {
+      color: #6B5B47;
+      font-size: 0.9rem;
+      line-height: 1.9;
+      max-width: 520px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: #6B5B47;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: var(--transition-base);
+    }
+
+    .back-link:hover {
+      color: var(--color-gold);
+    }
+
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(32px, 8vw, 100px) clamp(80px, 12vh, 140px);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--color-text-dark);
+      margin-bottom: 48px;
+    }
+
+    .gold-line {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--color-gold);
+      margin-bottom: 24px;
+    }
+
+    .intro-text {
+      max-width: 700px;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--color-text-dark);
+      margin-bottom: 80px;
+    }
+
+    /* Menu Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: clamp(40px, 8vw, 60px);
+      margin-bottom: clamp(100px, 15vh, 160px);
+    }
+
+    .menu-card {
+      background: var(--color-bg-alt);
+      padding: clamp(32px, 6vw, 48px);
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: var(--transition-base);
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .menu-grid.is-visible .menu-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .menu-card:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .menu-card:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .menu-card:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .menu-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .menu-card__name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-text-dark);
+      margin-bottom: 12px;
+    }
+
+    .menu-card__subtitle {
+      font-size: 0.9rem;
+      color: #7A6E62;
+      margin-bottom: 4px;
+    }
+
+    .menu-card__price {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--color-gold);
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .menu-card__description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-text-dark);
+    }
+
+    /* Section with image */
+    .dining-section-with-image {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 8vw, 80px);
+      align-items: center;
+      margin-bottom: clamp(100px, 15vh, 160px);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .dining-section-with-image.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dining-section-with-image__content h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 400;
+      color: var(--color-text-dark);
+      margin-bottom: 24px;
+    }
+
+    .dining-section-with-image__content p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text-dark);
+      margin-bottom: 16px;
+    }
+
+    .breakfast-items {
+      list-style: none;
+      margin: 24px 0;
+    }
+
+    .breakfast-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .breakfast-item__name {
+      flex: 1;
+      color: var(--color-text-dark);
+    }
+
+    .breakfast-item__price {
+      color: var(--color-gold);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      margin-left: 16px;
+      white-space: nowrap;
+    }
+
+    .dining-section-with-image__image {
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .dining-section-with-image__image img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      color: var(--color-bg-warm);
+      background: var(--color-text-dark);
+      padding: 16px 36px;
+      margin-top: 40px;
+      text-decoration: none;
+      transition: var(--transition-base);
+      text-transform: uppercase;
+    }
+
+    .cta-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-text-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-text-dark);
+      color: rgba(251, 247, 240, 0.6);
+      padding: 48px clamp(32px, 8vw, 100px);
+      margin-top: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      color: var(--color-gold);
+    }
+
+    footer .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      .dining-section-with-image {
+        grid-template-columns: 1fr;
+      }
+
+      .dining-section-with-image__image img {
+        height: 300px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .page-hero {
+        padding: 100px clamp(32px, 8vw, 100px) clamp(50px, 8vh, 80px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header header--scrolled">
+    <div class="header__container">
+      <div class="header__logo" style="cursor:pointer;" onclick="location.href='../'">
+        <span class="header__logo-main">KAZUKI</span>
+        <span class="header__logo-sub">RESORT & SPA</span>
+      </div>
+      <nav class="header__nav">
+        <a href="../rooms/" class="header__nav-link">お部屋</a>
+        <a href="../dining/" class="header__nav-link">レストラン</a>
+        <a href="../spa/" class="header__nav-link">スパ & 温泉</a>
+        <a href="../access/" class="header__nav-link">アクセス</a>
+        <a href="../#reserve" class="header__nav-link">ご予約</a>
+      </nav>
+      <button class="header__cta" onclick="location.href='../#reserve'">ご予約はこちら</button>
+    </div>
+  </header>
+
+  <!-- Page Hero Section -->
+  <section class="page-hero" style="margin-top: 80px;">
+    <a href="../" class="back-link">← トップページへ</a>
+    <div class="gold-line"></div>
+    <p class="page-hero__sub">Dining</p>
+    <h1 class="page-hero__title">お食事のご案内</h1>
+    <p class="page-hero__desc">
+      箱根の山海の幸を贅沢に使った会席料理。
+      四季の移ろいを皿に映す、調理長による創意工夫の一皿です。
+    </p>
+  </section>
+
+  <!-- Intro Text -->
+  <section class="section-container">
+    <p class="intro-text">
+      毎朝、市場から厳選した旬の食材を仕入れます。地元箱根の野菜や、熱海港で水揚げされた新鮮な海の幸。
+      それぞれの季節の「おいしさ」を、調理長の技と心で仕上げた會席料理です。
+    </p>
+  </section>
+
+  <!-- Dinner Courses Section -->
+  <section class="section-container">
+    <h2 class="section-title">
+      <span class="gold-line"></span>
+      夕食会席コース
+    </h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card__name">華（はな）コース</div>
+        <div class="menu-card__subtitle">7品構成</div>
+        <div class="menu-card__price">¥18,000 / 1名</div>
+        <p class="menu-card__description">
+          旬の食材を活かした標準コース。KAZUKI の基本となる會席料理をお楽しみいただけます。季節ごとに内容が変わります。
+        </p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card__name">風（かぜ）コース</div>
+        <div class="menu-card__subtitle">10品構成</div>
+        <div class="menu-card__price">¥25,000 / 1名</div>
+        <p class="menu-card__description">
+          厳選食材と職人技が光るプレミアムコース。より多くの季節の恵みを贅沢にご堪能いただきます。
+        </p>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card__name">雅（みやび）コース</div>
+        <div class="menu-card__subtitle">13品構成</div>
+        <div class="menu-card__price">¥38,000 / 1名</div>
+        <p class="menu-card__description">
+          最高級食材を使った特別な一夜。調理長の技術と創意が結集した、当館最上級のコースです。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breakfast Section -->
+  <section class="section-container">
+    <div class="dining-section-with-image">
+      <div class="dining-section-with-image__content">
+        <h3>朝食</h3>
+        <p>
+          朝の時間を大切に過ごしていただけるよう、体に優しく栄養バランスの取れた朝食をご用意いたしています。
+        </p>
+        <ul class="breakfast-items">
+          <li class="breakfast-item">
+            <span class="breakfast-item__name">和朝食</span>
+            <span class="breakfast-item__price">¥3,500 / 1名</span>
+          </li>
+          <li class="breakfast-item">
+            <span class="breakfast-item__name">白ごはん・お味噌汁・焼き魚・小鉢7品</span>
+          </li>
+        </ul>
+        <ul class="breakfast-items">
+          <li class="breakfast-item">
+            <span class="breakfast-item__name">洋朝食</span>
+            <span class="breakfast-item__price">¥3,000 / 1名</span>
+          </li>
+          <li class="breakfast-item">
+            <span class="breakfast-item__name">クロワッサン・新鮮サラダ・スクランブルエッグ</span>
+          </li>
+        </ul>
+        <p style="margin-top: 24px; font-size: 0.9rem; color: #7A6E62;">
+          ※ ご予約時にお選びいただけます
+        </p>
+      </div>
+      <div class="dining-section-with-image__image">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85&auto=format&fit=crop" alt="お食事">
+      </div>
+    </div>
+  </section>
+
+  <!-- Bar & Lounge Section -->
+  <section class="section-container">
+    <h2 class="section-title">
+      <span class="gold-line"></span>
+      バー & ラウンジ
+    </h2>
+    <div style="background: var(--color-bg-alt); padding: clamp(40px, 8vw, 60px); border-radius: 2px;">
+      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; color: var(--color-text-dark); margin-bottom: 16px;">
+        営業時間
+      </h3>
+      <p style="font-size: 1rem; line-height: 1.8; color: var(--color-text-dark); margin-bottom: 24px;">
+        <strong>18:00〜23:00</strong>
+      </p>
+      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; color: var(--color-text-dark); margin-bottom: 16px;">
+        ドリンク メニュー
+      </h3>
+      <ul style="list-style: none;">
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--color-border); font-size: 0.95rem; line-height: 1.6; color: var(--color-text-dark);">
+          ウイスキー — 日本の蒸留所から世界の銘柄まで、厳選したコレクション
+        </li>
+        <li style="padding: 12px 0; border-bottom: 1px solid var(--color-border); font-size: 0.95rem; line-height: 1.6; color: var(--color-text-dark);">
+          日本酒 — 季節の地酒や、稀少な純米大吟醸をご用意
+        </li>
+        <li style="padding: 12px 0; font-size: 0.95rem; line-height: 1.6; color: var(--color-text-dark);">
+          カクテル — バーテンダーによるオリジナルカクテルをお楽しみください
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section style="background: var(--color-text-dark); color: var(--color-bg-warm); padding: 80px clamp(32px, 8vw, 100px); text-align: center; margin-top: 100px;">
+    <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 24px;">
+      特別な食事体験をお約束いたします
+    </h2>
+    <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 40px; opacity: 0.9;">
+      ご予約時に、アレルギー対応やコース選択などをお聞かせください。
+      <br>調理長一同、皆様のお越しをお待ち申し上げます。
+    </p>
+    <a href="../#reserve" class="cta-btn" style="color: var(--color-text-dark); background: var(--color-gold);">ご予約はこちら</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">KAZUKI<br><span style="font-size: 0.7rem; letter-spacing: 0.2em;">RESORT & SPA</span></div>
+    <div class="footer-copy">© 2026 KAZUKI RESORT & SPA. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards and sections
+    document.querySelectorAll('.menu-grid, .dining-section-with-image').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
