@@ -950,6 +950,8 @@ img {
   overflow: hidden;
   background-color: var(--color-white);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  min-height: 380px;
+  height: 380px;
 }
 
 .access__map-placeholder {
