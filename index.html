@@ -30,7 +30,7 @@
         <a href="#access" class="header__nav-link">アクセス</a>
         <a href="#reserve" class="header__nav-link">ご予約</a>
       </nav>
-      <button class="header__cta">ご予約はこちら</button>
+      <a href="#commission" class="header__cta">このサイトを制作する</a>
     </div>
   </header>
 
@@ -44,7 +44,7 @@
       <p class="hero__subtitle">RESORT & SPA</p>
       <div class="hero__divider"></div>
       <p class="hero__tagline">時を忘れ、自分に還る場所</p>
-      <button class="hero__cta">ご予約・空室確認</button>
+      <a href="#commission" class="hero__cta">このサイトを制作する →</a>
     </div>
     <div class="hero__scroll-indicator">
       <div class="hero__scroll-line"></div>
@@ -87,7 +87,7 @@
             <p class="room-editorial__specs">60㎡ &ensp;|&ensp; 最大2名</p>
             <p class="room-editorial__price">from <em>¥35,000</em> / 泊</p>
             <p class="room-editorial__desc">箱根の山々を望む和室。檜の浴槽と源泉掛け流し温泉で、四季折々の自然を感じながら贅沢なひとときをお過ごしいただけます。</p>
-            <a href="rooms/" class="room-editorial__link">詳細を見る →</a>
+            <a href="#rooms" class="room-editorial__link">詳細を見る →</a>
           </div>
         </article>
         <div class="rooms__divider"></div>
@@ -103,7 +103,7 @@
             <p class="room-editorial__specs">90㎡ &ensp;|&ensp; 最大2名</p>
             <p class="room-editorial__price">from <em>¥65,000</em> / 泊</p>
             <p class="room-editorial__desc">プライベート露天風呂を完備したスイート。湯浴みをしながら箱根の星空を眺める、特別な夜をお約束いたします。</p>
-            <a href="rooms/" class="room-editorial__link">詳細を見る →</a>
+            <a href="#rooms" class="room-editorial__link">詳細を見る →</a>
           </div>
         </article>
         <div class="rooms__divider"></div>
@@ -119,7 +119,7 @@
             <p class="room-editorial__specs">120㎡ &ensp;|&ensp; 最大4名</p>
             <p class="room-editorial__price">from <em>¥95,000</em> / 泊</p>
             <p class="room-editorial__desc">最上級のおもてなしを実現したスイートルーム。リビング、寝室、露天風呂を備え、ご家族やご友人との特別な時間をお創りいただけます。</p>
-            <a href="rooms/" class="room-editorial__link">詳細を見る →</a>
+            <a href="#rooms" class="room-editorial__link">詳細を見る →</a>
           </div>
         </article>
 
@@ -136,7 +136,7 @@
       <h2 class="spa__title">源泉掛け流しの、<br>静寂。</h2>
       <div class="spa__divider"></div>
       <p class="spa__desc">自然の恵みが詰まった温泉と、心身を癒すスパ体験。<br>毎分120リットルの源泉を、加温・加水なしで引湯。</p>
-      <a href="spa/" class="spa__link">スパメニューを見る</a>
+      <a href="#spa" class="spa__link">スパメニューを見る</a>
     </div>
   </section>
 
@@ -151,7 +151,7 @@
       <p class="restaurant__description">
         季節の食材を最高の状態でお食べいただくため、毎朝市場から厳選した旬の品々をご用意いたております。地元箱根の野菜や、熱海港で水揚げされた新鮮な海の幸。
       </p>
-      <a href="dining/" class="restaurant__link">メニューを見る</a>
+      <a href="#restaurant" class="restaurant__link">メニューを見る</a>
     </div>
   </section>
 
@@ -196,9 +196,46 @@
       <h2 class="reserve__title">箱根への旅を、<br>始める。</h2>
       <p class="reserve__subtitle">KAZUKI RESORT & SPA — 仙石原</p>
       <div class="reserve__buttons">
-        <a href="#" class="reserve__btn reserve__btn--primary">空室を確認する</a>
-        <a href="#" class="reserve__btn reserve__btn--secondary">お問い合わせ</a>
+        <a href="#commission" class="reserve__btn reserve__btn--primary">このサイトを制作する →</a>
+        <a href="#commission" class="reserve__btn reserve__btn--secondary">無料相談を申し込む</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Commission Section -->
+  <section class="commission" id="commission">
+    <div class="commission__inner">
+      <span class="commission__eyebrow">— LP制作のご依頼</span>
+      <h2 class="commission__title">このようなサイトを、<br><em>あなたの旅館に。</em></h2>
+      <p class="commission__body">AI × 高品質デザインで、ホテル・旅館・施設向けLPを短期間・低コストで制作します。<br>初回のご相談は無料です。</p>
+      <form class="commission__form" action="https://formspree.io/f/XXXXXXXX" method="POST">
+        <div class="commission__row">
+          <div class="commission__field">
+            <input type="text" name="name" id="k-name" placeholder=" " required class="commission__input">
+            <label for="k-name" class="commission__label">お名前 <span>*</span></label>
+          </div>
+          <div class="commission__field">
+            <input type="email" name="email" id="k-email" placeholder=" " required class="commission__input">
+            <label for="k-email" class="commission__label">メールアドレス <span>*</span></label>
+          </div>
+        </div>
+        <div class="commission__field">
+          <select name="service" id="k-service" class="commission__input commission__select" required>
+            <option value="" disabled selected>ご希望のサービス *</option>
+            <option value="hotel-lp">ホテル・旅館向けLP（このサイトのような）</option>
+            <option value="beauty-salon-lp">美容サロン向けLP</option>
+            <option value="restaurant-lp">飲食店向けLP</option>
+            <option value="corporate-lp">企業・コーポレートLP</option>
+            <option value="other">その他・まずは相談したい</option>
+          </select>
+        </div>
+        <div class="commission__field">
+          <textarea name="message" id="k-message" rows="4" placeholder=" " class="commission__textarea"></textarea>
+          <label for="k-message" class="commission__label">ご要望・ご質問（任意）</label>
+        </div>
+        <button type="submit" class="commission__submit">無料相談を申し込む →</button>
+      </form>
+      <p class="commission__note">※ 送信後、1〜2営業日以内にご連絡いたします。</p>
     </div>
   </section>
 
@@ -210,11 +247,11 @@
         <span class="footer__logo-sub">RESORT & SPA</span>
       </div>
       <nav class="footer__nav">
-        <a href="#" class="footer__nav-link">お部屋</a>
-        <a href="#" class="footer__nav-link">レストラン</a>
-        <a href="#" class="footer__nav-link">スパ & 温泉</a>
-        <a href="#" class="footer__nav-link">アクセス</a>
-        <a href="#" class="footer__nav-link">ご予約</a>
+        <a href="#rooms" class="footer__nav-link">お部屋</a>
+        <a href="#restaurant" class="footer__nav-link">レストラン</a>
+        <a href="#spa" class="footer__nav-link">スパ & 温泉</a>
+        <a href="#access" class="footer__nav-link">アクセス</a>
+        <a href="#commission" class="footer__nav-link">制作依頼</a>
       </nav>
       <p class="footer__copyright">© 2026 KAZUKI RESORT & SPA. All rights reserved.</p>
     </div>

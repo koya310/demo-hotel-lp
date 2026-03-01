@@ -1432,3 +1432,170 @@ img {
 .access__map {
   background-color: var(--color-surface);
 }
+
+/* ============================================
+   COMMISSION SECTION
+   ============================================ */
+.commission {
+  background-color: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  padding: 100px var(--spacing-md);
+}
+
+.commission__inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.commission__eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.commission__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  color: var(--color-text-dark);
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.commission__title em {
+  font-style: italic;
+  color: var(--color-gold-light);
+}
+
+.commission__body {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+
+.commission__form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.commission__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.commission__field {
+  position: relative;
+}
+
+.commission__input,
+.commission__textarea,
+.commission__select {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 300;
+  padding: 18px 14px 8px;
+  outline: none;
+  transition: border-color 0.3s, background 0.3s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.commission__input:focus,
+.commission__textarea:focus,
+.commission__select:focus {
+  border-color: var(--color-gold);
+  background: rgba(168, 134, 90, 0.05);
+}
+
+.commission__select {
+  padding: 14px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.commission__select:valid {
+  color: var(--color-text-dark);
+}
+
+.commission__textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.commission__label {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: top 0.2s, font-size 0.2s, color 0.2s;
+}
+
+.commission__input:not(:placeholder-shown) ~ .commission__label,
+.commission__input:focus ~ .commission__label,
+.commission__textarea:not(:placeholder-shown) ~ .commission__label,
+.commission__textarea:focus ~ .commission__label {
+  top: 5px;
+  font-size: 0.65rem;
+  color: var(--color-gold);
+}
+
+.commission__label span {
+  color: var(--color-gold);
+}
+
+.commission__submit {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  text-transform: uppercase;
+}
+
+.commission__submit:hover {
+  background: var(--color-gold);
+  color: var(--color-bg-warm);
+}
+
+.commission__note {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* header__cta as anchor */
+.header__cta {
+  display: inline-block;
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .commission__row {
+    grid-template-columns: 1fr;
+  }
+  .commission {
+    padding: 60px var(--spacing-sm);
+  }
+}
