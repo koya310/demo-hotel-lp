@@ -267,7 +267,7 @@ img {
   z-index: 3;
   text-align: center;
   color: var(--color-white);
-  max-width: 600px;
+  max-width: min(1100px, 90vw);
   animation: fadeInUp 1s ease-out;
 }
 
@@ -543,7 +543,6 @@ img {
 
 .room-editorial__image {
   overflow: hidden;
-  aspect-ratio: 16/9;
 }
 
 .room-editorial__image img {
