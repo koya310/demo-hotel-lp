@@ -208,7 +208,7 @@
       <span class="commission__eyebrow">— LP制作のご依頼</span>
       <h2 class="commission__title">このようなサイトを、<br><em>あなたの旅館に。</em></h2>
       <p class="commission__body">AI × 高品質デザインで、ホテル・旅館・施設向けLPを短期間・低コストで制作します。<br>初回のご相談は無料です。</p>
-      <form class="commission__form" action="https://formspree.io/f/XXXXXXXX" method="POST">
+      <form class="commission__form" id="commission-form" action="/api/contact" method="POST">
         <div class="commission__row">
           <div class="commission__field">
             <input type="text" name="name" id="k-name" placeholder=" " required class="commission__input">
@@ -233,7 +233,8 @@
           <textarea name="message" id="k-message" rows="4" placeholder=" " class="commission__textarea"></textarea>
           <label for="k-message" class="commission__label">ご要望・ご質問（任意）</label>
         </div>
-        <button type="submit" class="commission__submit">無料相談を申し込む →</button>
+        <button type="submit" class="commission__submit" id="commission-submit">無料相談を申し込む →</button>
+        <div id="commission-status" style="display:none;margin-top:16px;padding:12px 16px;border-radius:6px;font-size:14px"></div>
       </form>
       <p class="commission__note">※ 送信後、1〜2営業日以内にご連絡いたします。</p>
     </div>
@@ -301,6 +302,41 @@
     document.querySelectorAll('.philosophy, .rooms, .restaurant, .access, .reserve').forEach(el => {
       observer.observe(el);
     });
+
+    // Commission form AJAX submission
+    const commissionForm = document.getElementById('commission-form');
+    const commissionStatus = document.getElementById('commission-status');
+    const commissionSubmit = document.getElementById('commission-submit');
+
+    if (commissionForm && commissionStatus) {
+      commissionForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        commissionSubmit.textContent = '送信中...';
+        commissionSubmit.disabled = true;
+
+        try {
+          const data = Object.fromEntries(new FormData(commissionForm));
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+
+          if (res.ok) {
+            commissionForm.style.display = 'none';
+            commissionStatus.style.cssText = 'display:block;background:#f0faf4;border:1px solid #a8d5b5;color:#1a6b35;padding:16px;border-radius:6px;font-size:14px';
+            commissionStatus.innerHTML = '<strong>ありがとうございます！</strong><br>お問い合わせを受け付けました。<br>通常48時間以内にご返信いたします。';
+          } else {
+            throw new Error('送信失敗');
+          }
+        } catch {
+          commissionSubmit.textContent = '無料相談を申し込む →';
+          commissionSubmit.disabled = false;
+          commissionStatus.style.cssText = 'display:block;background:#fff0f0;border:1px solid #f5c6c6;color:#c0392b;padding:16px;border-radius:6px;font-size:14px';
+          commissionStatus.textContent = '送信に失敗しました。直接メールでご連絡ください: support@irohani.tech';
+        }
+      });
+    }
   </script>
 
 </body>
